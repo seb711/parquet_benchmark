@@ -18,6 +18,7 @@ sync_uris() {
     if [[ ! -f "$index/$filename" ]]; then
       mkdir ./$index -p
       echo "./$index"
+      echo "$mod_uri"
       aws s3 cp "$mod_uri" "./$index" --no-sign
     fi 
 
