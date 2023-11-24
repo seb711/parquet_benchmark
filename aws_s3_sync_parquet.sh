@@ -19,7 +19,7 @@ sync_uris() {
       mkdir ./$index -p
       echo "./$index"
       echo "$mod_uri"
-      aws s3 cp "$mod_uri" "./$index" --no-sign
+      echo "aws s3 cp $mod_uri ./$index --no-sign"
     fi 
 
     ./parquet_benchmark ./$index/$replacement.parquet $repetitions > "./decompression-output-$replacement.txt"
