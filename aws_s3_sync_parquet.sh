@@ -13,12 +13,14 @@ sync_uris() {
     mod_uri=$(echo "$uri" | sed "s/$substring_to_replace/$replacement/g")
     echo "Syncing $(echo "$mod_uri" | sed "s/$substring_to_replace/$replacement/g") to S3... into ./$index"
     
-    filename=$(basename "$mod_uri")
+    aws s3 cp "$mod_uri" "./data" --no-sign
 
-    if [[ ! -f "./data/$filename" ]]; then
-      mkdir ./$index -p
-      aws s3 cp "$mod_uri" "./data" --no-sign
-    fi 
+    # filename=$(basename "$mod_uri")
+
+    #if [[ ! -f "./data/$filename" ]]; then
+      #mkdir ./$index -p
+     # aws s3 cp "$mod_uri" "./data" --no-sign
+    #fi 
 
     ./parquet_benchmark ./data/$replacement.parquet $repetitions > "./decompression-output-$replacement.txt"
 
