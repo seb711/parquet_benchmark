@@ -54,7 +54,7 @@ int main(int argc, char **argv) {
                 // The parquet_reader is invalid after this point.
                 std::unique_ptr<parquet::arrow::FileReader> arrow_reader;
                 auto arrow_reader_properties = parquet::default_arrow_reader_properties();
-                arrow_reader_properties.set_use_threads(false);
+                arrow_reader_properties.set_use_threads(true);
                 arrow_reader_properties.set_pre_buffer(true);
                 PARQUET_THROW_NOT_OK(
                         parquet::arrow::FileReader::Make(arrow::default_memory_pool(), std::move(parquet_reader),
