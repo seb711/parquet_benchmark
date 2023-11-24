@@ -17,7 +17,7 @@ sync_uris() {
 
     if [[ ! -f "./$index/$filename" ]]; then
       mkdir ./$index -p
-      aws s3 cp "$mod_uri" "./$index/$filename" --no-sign
+      aws s3 cp "$mod_uri" "./$index" --no-sign
     fi 
 
     ./parquet_benchmark ./$index/$filename $repetitions > "./decompression-output-$replacement.txt"
