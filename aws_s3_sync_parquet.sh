@@ -20,7 +20,7 @@ sync_uris() {
       aws s3 cp $mod_uri ./$index/ --no-sign
     fi 
 
-    ./parquet_benchmark_low_level ./$index/$filename $repetitions 64 > "./decompression-output-$replacement.txt"
+    ./parquet_benchmark_low_level ./$index/$filename $repetitions 64 >> "./decompression-output-$replacement.txt"
 
     ((index++))
 
