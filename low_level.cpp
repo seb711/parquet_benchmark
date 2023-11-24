@@ -262,7 +262,7 @@ int main(int argc, char **argv) {
     double avg_runtime = static_cast<double>(total_runtime) / static_cast<double>(repetitions);
 
 
-    std::cout << << total_compressed_size << ", " << avg_runtime << std::endl;
+    std::cout << total_compressed_size << ", " << avg_runtime << std::endl;
 
     return 0;
 }
