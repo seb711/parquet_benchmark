@@ -249,10 +249,11 @@ int main(int argc, char **argv) {
     auto runtime = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time);
     uint64_t total_runtime = runtime.count();
 
+    uint64_t total_runtime_col = 0;
     uint64_t total_uncompressed_size = 0;
     uint64_t total_compressed_size = 0;
     for (int column = 0; column < num_columns; column++) {
-        // double avg_runtime = static_cast<double>(runtimes[column]) / static_cast<double>(repetitions);
+        total_runtime_col = static_cast<double>(runtimes[column]) / static_cast<double>(repetitions);
         // double compression_ratio = static_cast<double>(uncompressed_sizes[column]) / static_cast<double>(compressed_sizes[column]);
         total_uncompressed_size += uncompressed_sizes[column];
         total_compressed_size += compressed_sizes[column];
@@ -262,7 +263,7 @@ int main(int argc, char **argv) {
     double avg_runtime = static_cast<double>(total_runtime) / static_cast<double>(repetitions);
 
     // new format needed for python script
-    std::cout << total_compressed_size << " " << avg_runtime << std::endl;
+    std::cout << total_compressed_size << " " << avg_runtime << " " << avg_runtime << std::endl;
 
     return 0;
 }
