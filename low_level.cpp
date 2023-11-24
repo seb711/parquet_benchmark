@@ -263,7 +263,7 @@ int main(int argc, char **argv) {
     double avg_runtime = static_cast<double>(total_runtime) / static_cast<double>(repetitions);
 
     // new format needed for python script
-    std::cout << total_compressed_size << " " << avg_runtime << " " << avg_runtime << std::endl;
+    std::cout << total_compressed_size << " " << avg_runtime << " " << total_runtime_col << std::endl;
 
     return 0;
 }
