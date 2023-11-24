@@ -20,7 +20,7 @@ sync_uris() {
       aws s3 cp $mod_uri ./$index/ --no-sign
     fi 
 
-    ./parquet_benchmark ./$index/$filename $repetitions > "./decompression-output-$replacement.txt"
+    ./parquet_benchmark_low_level ./$index/$filename $repetitions 64 > "./decompression-output-$replacement.txt"
 
     ((index++))
 
@@ -42,7 +42,7 @@ fi
 sudo apt-get install libthrift-dev libbrotli-dev libboost-all-dev libsnappy-dev libssl-dev libcurl4-openssl-dev -y
 
 # build the benchmark thing
-make -j4 parquet_benchmark
+make -j4 parquet_benchmark_low_level
 
 # Sync URIs from the CSV file
 # sync_uris "parquet_s3_files.csv" > "./decompression-output-$replacement.txt"

@@ -240,11 +240,7 @@ int main(int argc, char **argv) {
                     compressed_sizes[column_i] += compressed_size;
                     thread_local std::vector<char> output_buffer;
                     increase_vector_size(output_buffer, decompressed_size);
-#ifdef OUTPUTOLUMN
-                    runtimes[column_i] += measure_read(column_reader.get(), output_buffer.data(), tuple_count);
-#else
                     measure_read(column_reader.get(), output_buffer.data(), tuple_count);
-#endif
                 });
             });
         });
@@ -253,23 +249,11 @@ int main(int argc, char **argv) {
     auto runtime = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time);
     uint64_t total_runtime = runtime.count();
 
-#ifdef OUTPUTOLUMN
-    uint64_t total_uncompressed_size = 0;
-    uint64_t total_compressed_size = 0;
-    for (int column = 0; column < num_columns; column++) {
-        double avg_runtime = static_cast<double>(runtimes[column]) / static_cast<double>(repetitions);
-        double compression_ratio = static_cast<double>(uncompressed_sizes[column]) / static_cast<double>(compressed_sizes[column]);
-        total_uncompressed_size += uncompressed_sizes[column];
-        total_compressed_size += compressed_sizes[column];
-        std::cout << "Column " << column << " " << uncompressed_sizes[column] << " Bytes " << compressed_sizes[column] << " Bytes " << compression_ratio << " Ratio " << avg_runtime << " us" << std::endl;
-    }
-#endif
-
-#ifdef OUTPUTTOTAL
     double compression_ratio = static_cast<double>(total_uncompressed_size) / static_cast<double>(total_compressed_size);
     double avg_runtime = static_cast<double>(total_runtime) / static_cast<double>(repetitions);
-    std::cout << "Total: " << total_uncompressed_size << " Bytes " << total_compressed_size << " Bytes " << compression_ratio << " Ratio " << avg_runtime << " us" << std::endl;
-#endif
+
+
+    std::cout << << total_compressed_size << ", " << avg_runtime << std::endl;
 
     return 0;
 }
