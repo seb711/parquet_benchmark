@@ -2,7 +2,7 @@
 
 substring_to_replace="%PLACEHOLDER%"
 replacement="parquet_none_arrow_0"
-repetitions=10
+repetitions=5
 
 # Function to read CSV file and sync URIs
 sync_uris() {
@@ -12,9 +12,14 @@ sync_uris() {
   while IFS=',' read -r _ uri _; do
     mod_uri=$(echo "$uri" | sed "s/$substring_to_replace/$replacement/g")
     echo "Syncing $(echo "$mod_uri" | sed "s/$substring_to_replace/$replacement/g") to S3... into ./$index"
-    aws s3 sync "$mod_uri" ./data --nosign
+    
+    filename=$(basename "$mod_uri")
 
-    ./parquet_benchmark ./$index/$replacement.parquet $repetitions
+    if [[ ! -f "$index/$filename" ]]; then
+      aws s3 sync "$mod_uri" ./data --nosign
+    fi 
+
+    ./parquet_benchmark ./$index/$replacement.parquet $repetitions > "./decompression-output-$replacement.txt"
 
     ((index++))
 
