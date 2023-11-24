@@ -249,11 +249,9 @@ int main(int argc, char **argv) {
     auto runtime = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time);
     uint64_t total_runtime = runtime.count();
 
-    double compression_ratio = static_cast<double>(total_uncompressed_size) / static_cast<double>(total_compressed_size);
     double avg_runtime = static_cast<double>(total_runtime) / static_cast<double>(repetitions);
 
-
-    std::cout << << total_compressed_size << ", " << avg_runtime << std::endl;
+    std::cout << total_compressed_size << ", " << avg_runtime << std::endl;
 
     return 0;
 }
