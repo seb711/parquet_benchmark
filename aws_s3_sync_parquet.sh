@@ -15,14 +15,12 @@ sync_uris() {
     
     filename=$(basename "$mod_uri")
 
-    if [[ ! -f "$index/$filename" ]]; then
+    if [[ ! -f "./data/$filename" ]]; then
       mkdir ./$index -p
-      echo "./$index"
-      echo "$mod_uri"
-      echo "aws s3 cp $mod_uri ./$index --no-sign"
+      aws s3 cp "$mod_uri" "./data" --no-sign
     fi 
 
-    ./parquet_benchmark ./$index/$replacement.parquet $repetitions > "./decompression-output-$replacement.txt"
+    ./parquet_benchmark ./data/$replacement.parquet $repetitions > "./decompression-output-$replacement.txt"
 
     ((index++))
 
