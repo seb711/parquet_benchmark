@@ -11,7 +11,7 @@ sync_uris() {
 
   while IFS=',' read -r _ uri _; do
     mod_uri=$(echo "$uri" | sed "s/$substring_to_replace/$replacement/g")
-    echo "Syncing $(echo "$mod_uri" | sed "s/$substring_to_replace/$replacement/g") to S3... into ./$index"
+    echo "Syncing $mod_uri to S3... into ./data"
     
     aws s3 cp "$mod_uri" ./data
 
