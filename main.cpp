@@ -79,10 +79,16 @@ int main(int argc, char **argv) {
         }
     }
 
+    double avg_runtime_table = 0.0; 
+
     for (int column = 0; column < num_columns; column++) {
         double avg_runtime = static_cast<double>(runtimes[column]) / static_cast<double>(repetitions);
-        std::cout << "Column " << column << " " << avg_runtime << " us" << std::endl;
+
+        avg_runtime_table += avg_runtime; 
+        // std::cout << "Column " << column << " " << avg_runtime << " us" << std::endl;
     }
+
+    std::cout << avg_runtime_table << std::endl;
 
     return 0;
 }

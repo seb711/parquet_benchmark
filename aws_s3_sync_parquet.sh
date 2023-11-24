@@ -2,25 +2,25 @@
 
 substring_to_replace="%PLACEHOLDER%"
 replacement="parquet_none_arrow_0"
-
-# Using sed to replace the substring in the variable
-new_string=$(echo "$original_string" | sed "s/$substring_to_replace/$replacement/g")
-
-echo "Original string: $original_string"
-echo "New string: $new_string"
+repetitions=10
 
 # Function to read CSV file and sync URIs
 sync_uris() {
   input_file="$1"
+  index=1
 
   while IFS=',' read -r _ uri _; do
-    echo "Syncing $(echo "$uri" | sed "s/$substring_to_replace/$replacement/g") to S3..."
-    # aws s3 sync "$(echo "$uri" | sed "s/$substring_to_replace/$replacement/g")" --nosign
+    mod_uri=$(echo "$uri" | sed "s/$substring_to_replace/$replacement/g")
+    echo "Syncing $(echo "$mod_uri" | sed "s/$substring_to_replace/$replacement/g") to S3... into ./$index"
+    aws s3 sync "$mod_uri" ./data --nosign
+
+    ./parquet_benchmark ./$index/$replacement.parquet $repetitions
+
+    ((index++))
 
   done < "$input_file"
 }
 
-# Check if AWS CLI is installed
 if ! command -v aws &> /dev/null; then
   echo "AWS CLI not found. Please install it and configure."
   exit 1
@@ -36,4 +36,5 @@ fi
 make parquet_benchmark
 
 # Sync URIs from the CSV file
+# sync_uris "parquet_s3_files.csv" > "./decompression-output-$replacement.txt"
 sync_uris "parquet_s3_files.csv"

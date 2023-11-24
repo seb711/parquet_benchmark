@@ -1,4 +1,3 @@
-dataset, s3-link
 Corporations_1, s3://sauerwein-public-bi-benchmark-parquet/generator/Corporations_1/%PLACEHOLDER%.parquet
 YaleLanguages_1, s3://sauerwein-public-bi-benchmark-parquet/generator/YaleLanguages_1/%PLACEHOLDER%.parquet
 Food_1, s3://sauerwein-public-bi-benchmark-parquet/generator/Food_1/%PLACEHOLDER%.parquet
