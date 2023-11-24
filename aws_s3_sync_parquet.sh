@@ -16,6 +16,7 @@ sync_uris() {
     filename=$(basename "$mod_uri")
 
     if [[ ! -f "$index/$filename" ]]; then
+      mkdir ./$index -p
       aws s3 cp "$mod_uri" ./$index --no-sign
     fi 
 
@@ -36,6 +37,9 @@ if [[ ! -f "../parquet_s3_files.csv" ]]; then
   echo "parquet_s3_files.csv file not found."
   exit 1
 fi
+
+# install things
+sudo apt-get install libthrift-dev libbrotli-dev libboost-all-dev libsnappy-dev libssl-dev libcurl4-openssl-dev
 
 # build the benchmark thing
 make parquet_benchmark
