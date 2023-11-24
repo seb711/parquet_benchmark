@@ -3,7 +3,7 @@ YaleLanguages_1, s3://sauerwein-public-bi-benchmark-parquet/generator/YaleLangua
 Food_1, s3://sauerwein-public-bi-benchmark-parquet/generator/Food_1/%PLACEHOLDER%.parquet
 Euro2016_1, s3://sauerwein-public-bi-benchmark-parquet/generator/Euro2016_1/%PLACEHOLDER%.parquet
 CityMaxCapita_1, s3://sauerwein-public-bi-benchmark-parquet/generator/CityMaxCapita_1/%PLACEHOLDER%.parquet
-Rentabilidad_1, s3://sauerwein-public-bi-benchmark-parquet/generator/Rentabilidad_1/%PLACEHOLDER%.parque
+Rentabilidad_1, s3://sauerwein-public-bi-benchmark-parquet/generator/Rentabilidad_1/%PLACEHOLDER%.parquet
 Romance_1, s3://sauerwein-public-bi-benchmark-parquet/generator/Romance_1/%PLACEHOLDER%.parquet
 Arade_1, s3://sauerwein-public-bi-benchmark-parquet/generator/Arade_1/%PLACEHOLDER%.parquet
 HashTags_1, s3://sauerwein-public-bi-benchmark-parquet/generator/HashTags_1/%PLACEHOLDER%.parquet
