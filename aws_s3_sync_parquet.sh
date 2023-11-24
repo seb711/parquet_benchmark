@@ -11,13 +11,13 @@ sync_uris() {
 
   while IFS=',' read -r _ uri _; do
     mod_uri=$(echo "$uri" | sed "s/$substring_to_replace/$replacement/g")
-    # echo "aws $mod_uri ./data"
+    echo "aws s3 cp $mod_uri ./$index"
     
     filename=$(basename "$mod_uri")
 
     if [[ ! -f "./$index/$filename" ]]; then
       mkdir ./$index -p
-      aws s3 cp "$mod_uri" "./$index" --no-sign
+      aws s3 cp $mod_uri ./$index/ --no-sign
     fi 
 
     ./parquet_benchmark ./$index/$filename $repetitions > "./decompression-output-$replacement.txt"
@@ -39,10 +39,10 @@ if [[ ! -f "../parquet_s3_files.csv" ]]; then
 fi
 
 # install things
-sudo apt-get install libthrift-dev libbrotli-dev libboost-all-dev libsnappy-dev libssl-dev libcurl4-openssl-dev
+sudo apt-get install libthrift-dev libbrotli-dev libboost-all-dev libsnappy-dev libssl-dev libcurl4-openssl-dev -y
 
 # build the benchmark thing
-make parquet_benchmark
+make -j4 parquet_benchmark
 
 # Sync URIs from the CSV file
 # sync_uris "parquet_s3_files.csv" > "./decompression-output-$replacement.txt"
