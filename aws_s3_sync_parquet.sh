@@ -11,16 +11,14 @@ sync_uris() {
 
   while IFS=',' read -r _ uri _; do
     mod_uri=$(echo "$uri" | sed "s/$substring_to_replace/$replacement/g")
-    echo "aws $mod_uri ./data"
+    # echo "aws $mod_uri ./data"
     
-    aws s3 cp $mod_uri ./data
+    filename=$(basename "$mod_uri")
 
-    # filename=$(basename "$mod_uri")
-
-    #if [[ ! -f "./data/$filename" ]]; then
-      #mkdir ./$index -p
-     # aws s3 cp "$mod_uri" "./data" --no-sign
-    #fi 
+    if [[ ! -f "./data/$filename" ]]; then
+      mkdir ./$index -p
+      aws s3 cp "$mod_uri" "./data/$replacement.parquet" --no-sign
+    fi 
 
     ./parquet_benchmark ./data/$replacement.parquet $repetitions > "./decompression-output-$replacement.txt"
 
