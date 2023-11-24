@@ -13,7 +13,7 @@ sync_uris() {
     mod_uri=$(echo "$uri" | sed "s/$substring_to_replace/$replacement/g")
     echo "Syncing $(echo "$mod_uri" | sed "s/$substring_to_replace/$replacement/g") to S3... into ./$index"
     
-    aws s3 cp "$mod_uri" "./data" --no-sign
+    aws s3 cp "$mod_uri" ./data
 
     # filename=$(basename "$mod_uri")
 
