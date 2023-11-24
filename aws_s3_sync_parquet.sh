@@ -16,7 +16,7 @@ sync_uris() {
     filename=$(basename "$mod_uri")
 
     if [[ ! -f "$index/$filename" ]]; then
-      aws s3 sync "$mod_uri" ./data --no-sign
+      aws s3 cp "$mod_uri" ./data --no-sign
     fi 
 
     ./parquet_benchmark ./$index/$replacement.parquet $repetitions > "./decompression-output-$replacement.txt"
