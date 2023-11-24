@@ -32,7 +32,7 @@ if ! command -v aws &> /dev/null; then
 fi
 
 # Check if uris.csv exists
-if [[ ! -f "parquet_s3_files.csv" ]]; then
+if [[ ! -f "../parquet_s3_files.csv" ]]; then
   echo "parquet_s3_files.csv file not found."
   exit 1
 fi
@@ -42,4 +42,4 @@ make parquet_benchmark
 
 # Sync URIs from the CSV file
 # sync_uris "parquet_s3_files.csv" > "./decompression-output-$replacement.txt"
-sync_uris "parquet_s3_files.csv"
+sync_uris "../parquet_s3_files.csv"
