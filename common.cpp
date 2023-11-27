@@ -5,7 +5,6 @@
 #include "common.hpp"
 
 #include <cassert>
-#include <iostream> 
 
 #include <parquet/file_reader.h>
 
@@ -17,7 +16,6 @@ std::vector<std::filesystem::path> get_parquet_files(const char *parquet_c_path)
         if (entry.is_directory()) {
             for (auto const& dir_entry : std::filesystem::directory_iterator{parquet_path}) {
                 if (dir_entry.path().extension() == ".parquet") {
-                    std::cout << dir_entry.path() << std::endl; 
                     parquet_files.push_back(dir_entry.path());
                 }
             }
