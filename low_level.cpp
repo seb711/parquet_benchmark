@@ -261,6 +261,7 @@ int main(int argc, char **argv) {
     }
     double compression_ratio = static_cast<double>(total_uncompressed_size) / static_cast<double>(total_compressed_size);
     double avg_runtime = static_cast<double>(total_runtime) / static_cast<double>(repetitions);
+    double total_compressed_size_ratio = static_cast<double>(total_compressed_size) / static_cast<double>(repetitions);
 
     // new format needed for python script
     std::cout << total_compressed_size << " " << avg_runtime << " " << total_runtime_col << std::endl;
