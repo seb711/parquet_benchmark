@@ -195,6 +195,7 @@ int main(int argc, char **argv) {
     std::vector<std::vector<char>> file_vector(parquet_files.size());
     tbb::parallel_for(std::size_t(0), parquet_files.size(), [&](std::size_t idx) {
         auto path = parquet_files[idx];
+        std::cout << path << std::endl; 
         std::ifstream file_stream(path, std::ios::binary | std::ios::ate);
         if (file_stream.fail()) {
             auto msg = "Error opening " + path.string();
