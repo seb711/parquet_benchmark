@@ -5,6 +5,7 @@
 #include "common.hpp"
 
 #include <cassert>
+#include <iostream> 
 
 #include <parquet/file_reader.h>
 
