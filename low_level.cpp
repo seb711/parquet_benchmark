@@ -264,7 +264,7 @@ int main(int argc, char **argv) {
     double total_compressed_size_ratio = static_cast<double>(total_compressed_size) / static_cast<double>(repetitions);
 
     // new format needed for python script
-    std::cout << total_compressed_size << " " << avg_runtime << " " << total_runtime_col << std::endl;
+    std::cout << total_compressed_size << " " << avg_runtime << std::endl;
 
     return 0;
 }
